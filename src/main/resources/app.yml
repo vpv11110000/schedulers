@@ -1,0 +1,17 @@
+
+spring.profiles.active: profile-job-1, profile-job-2
+
+logging.file: myapplication.log
+logging.level.root: INFO
+
+vpvexamples.schedulers.scheduling.threadpooltasks_cheduler_size: 1
+
+scheduling.on: true
+
+---
+spring.profiles: profile-job-1
+scheduling.jobs.cron_1: 0/1 * * * * *
+---
+spring.profiles: profile-job-2
+scheduling.jobs.cron_2: 0/3 * * * * *
+---

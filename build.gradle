@@ -1,0 +1,53 @@
+group 'examples'
+version '1.0-SNAPSHOT'
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url 'https://repo.spring.io/libs-snapshot'
+    }
+}
+
+buildscript {
+    ext {
+        springBootVersion = '2.0.0.M7'
+    }
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven { url 'http://repo.spring.io/plugins-release' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+project.sourceCompatibility = 1.8
+project.targetCompatibility = 1.8
+
+configure(allprojects) {
+    apply plugin: 'propdeps'
+    apply plugin: 'propdeps-maven'
+    apply plugin: 'propdeps-idea'
+    apply plugin: 'propdeps-eclipse'
+}
+
+dependencies {
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.0.0.M7'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.0.0.M7'
+    compile group: 'org.springframework.boot', name: 'spring-boot-actuator-docs', version: '2.0.0.M3'
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile "org.powermock:powermock-module-junit4:1.6.2+"
+    testCompile "org.powermock:powermock-api-mockito:1.6.2+"
+}
+
+//"--spring.config.location=file:./app.yml"
+
